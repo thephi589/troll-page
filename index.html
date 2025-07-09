@@ -1,94 +1,103 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>💀 NamDzai đã điều khiển hệ thống</title>
+  <title>NamDzai đã chiếm quyền</title>
   <style>
-    body{background:#000;color:#0f0;font-family:"Courier New",monospace;margin:0;overflow:hidden}
-    h1{font-size:2.6rem;text-align:center;margin:1.5rem 0;animation:flash 1s infinite alternate;text-shadow:0 0 10px #0f0,0 0 20px #0f0}
-    @keyframes flash{from{opacity:.4}to{opacity:1}}
-    #output{max-width:800px;margin:1rem auto;white-space:pre-wrap}
-    p{margin:.3rem 0}
-    #start{display:block;margin:2rem auto;padding:14px 28px;font-size:1.1rem;font-weight:bold;background:#0f0;color:#000;border:none;border-radius:4px;cursor:pointer;animation:pulse 1.2s infinite}
-    @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.1)}100%{transform:scale(1)}}
-    img.fly{position:fixed;top:45%;left:-220px;width:180px;animation:fly 12s linear infinite;opacity:.85;z-index:1}
-    @keyframes fly{0%{transform:translateX(0)}100%{transform:translateX(160vw)}}
-    .matrix{position:fixed;inset:0;background:url("https://media.giphy.com/media/VdoIFLsMIlwzfKD520/giphy.gif") center/cover;opacity:.06;z-index:0}
-    /* Question overlay */
-    #questionWrap{position:fixed;inset:0;background:rgba(0,0,0,0.86);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#0f0;font-size:1.4rem;visibility:hidden;z-index:2}
-    #btnYes,#btnNo{margin:1rem;font-size:1.1rem;padding:10px 24px;border:none;border-radius:4px;font-weight:bold;cursor:pointer}
-    #btnYes{background:#0f0;color:#000}
-    #btnNo{background:#f00;color:#fff;position:relative}
+    body {
+      background-color: black;
+      color: lime;
+      font-family: "Courier New", Courier, monospace;
+      text-align: center;
+      padding-top: 50px;
+      overflow: hidden;
+    }
+    .blink {
+      animation: blink-animation 1s steps(2, start) infinite;
+      font-size: 24px;
+      color: lime;
+      font-weight: bold;
+    }
+    @keyframes blink-animation {
+      to {
+        visibility: hidden;
+      }
+    }
+    .jack-img {
+      position: absolute;
+      bottom: 10px;
+      right: 10px;
+      width: 200px;
+    }
+    #question-container {
+      display: none;
+      margin-top: 40px;
+    }
+    button {
+      font-size: 18px;
+      padding: 10px 20px;
+      margin: 10px;
+      cursor: pointer;
+      border: none;
+      border-radius: 5px;
+    }
+    #yesBtn {
+      background-color: green;
+      color: white;
+    }
+    #noBtn {
+      background-color: red;
+      color: white;
+      position: relative;
+    }
+    #response {
+      margin-top: 30px;
+      color: cyan;
+      font-weight: bold;
+    }
   </style>
 </head>
 <body>
-  <div class="matrix"></div>
-  <h1 id="title">💀  HỆ THỐNG ĐANG CHỜ KÍCH HOẠT  💀</h1>
-  <button id="start">Click vào Nam cho 20k</button>
-  <img src="jack_flying.png" class="fly" alt="Jack bay">
-  <div id="output"></div>
+  <h1 class="blink">💀 NamDzai đã chiếm quyền thiết bị 💀</h1>
+  <p>🟢 Kết nối tới hệ thống nội bộ...</p>
+  <p>📡 Phát hiện hệ điều hành...</p>
+  <p>🖥️ Trình duyệt: <script>document.write(navigator.userAgent);</script></p>
+  <p>📌 Đang tải giao diện điều khiển...</p>
+  <img src="jack_flying.png" class="jack-img" />
 
-  <div id="questionWrap">
-    <div>Nam có đẹp trai không? 😎</div>
-    <div>
-      <button id="btnYes">Có</button>
-      <button id="btnNo">Không</button>
-    </div>
+  <audio autoplay loop>
+    <source src="Đom Đóm ( Htrol Remix ) Jack x BOB studio Cover   Nhạc Trẻ Edm Hot Tik Tok Gây Nghiện Hay Nhất 2021.mp3" type="audio/mpeg">
+  </audio>
+
+  <div id="question-container">
+    <p style="color: white;">Muốn khôi phục lại máy thì cần trả lời:</p>
+    <h2 style="color: yellow;">Nam có đẹp trai không?</h2>
+    <button id="yesBtn">Rất tốt</button>
+    <button id="noBtn">Không</button>
+    <p id="response"></p>
   </div>
 
-  <audio id="music" src="jack.mp3" preload="auto"></audio>
+  <script>
+    setTimeout(() => {
+      document.getElementById("question-container").style.display = "block";
+    }, 7000);
 
-<script>
-const lines=[
-  "💻 Đang truy cập hệ thống...",
-  "📡 Kết nối mạng nội bộ...",
-  "🔍 Đang dò thiết bị...",
-  "✅ Trình duyệt: "+navigator.userAgent,
-  "✅ Thiết bị: "+navigator.platform,
-  "🌐 Ngôn ngữ: "+navigator.language,
-  "💀 Máy tính này đã bị NamDzai điều khiển.",
-  "🧠 Gửi dữ liệu về server chủ..."
-];
-const startBtn=document.getElementById("start");
-const out=document.getElementById("output");
-const music=document.getElementById("music");
-const question=document.getElementById("questionWrap");
-const btnYes=document.getElementById("btnYes");
-const btnNo=document.getElementById("btnNo");
+    const yesBtn = document.getElementById("yesBtn");
+    const noBtn = document.getElementById("noBtn");
+    const response = document.getElementById("response");
 
-startBtn.onclick=()=>{
-  startBtn.style.display="none";
-  music.play().catch(()=>{});
-  let i=0;
-  const typer=setInterval(()=>{
-    if(i<lines.length){
-      const p=document.createElement("p");
-      p.textContent=lines[i++];
-      out.appendChild(p);
-    }else{
-      clearInterval(typer);
-      question.style.visibility="visible";
-    }
-  },900);
-  // webhook
-  fetch("https://discord.com/api/webhooks/1392380082294755469/ZPG-NeK16KST7Wiqui79Avk9Ju7X18aaA_yilLwcqBvebgvW_6zwBwz0e1IRUD1ca3mp",{method:"POST",headers:{'Content-Type':'application/json'},body:JSON.stringify({content:"😈 Nạn nhân đã kích hoạt hệ thống"})});
-};
+    yesBtn.onclick = () => {
+      response.innerText = "Vì thành khẩn trả lời, NamDzai đã khôi phục lại máy cho bạn.";
+    };
 
-btnYes.onclick=()=>{
-  question.innerHTML="<h2>✅ Cảm ơn! Hệ thống được khôi phục.</h2>";
-  setTimeout(()=>{location.reload();},3000);
-};
-
-btnNo.addEventListener("mouseover",moveNo);
-btnNo.addEventListener("click",moveNo);
-
-function moveNo(){
-  const vw=window.innerWidth-100;
-  const vh=window.innerHeight-40;
-  btnNo.style.position="absolute";
-  btnNo.style.left=Math.random()*vw+"px";
-  btnNo.style.top=Math.random()*vh+"px";
-}
-</script>
+    noBtn.onmouseover = () => {
+      const x = Math.random() * (window.innerWidth - 100);
+      const y = Math.random() * (window.innerHeight - 50);
+      noBtn.style.position = "absolute";
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    };
+  </script>
 </body>
 </html>
