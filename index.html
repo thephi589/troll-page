@@ -67,13 +67,13 @@
   <img src="jack_flying.png" class="jack-img" />
 
   <audio autoplay loop>
-    <source src="Đom Đóm ( Htrol Remix ) Jack x BOB studio Cover   Nhạc Trẻ Edm Hot Tik Tok Gây Nghiện Hay Nhất 2021.mp3" type="audio/mpeg">
+    <source src="jack.mp3" type="audio/mpeg">
   </audio>
 
   <div id="question-container">
     <p style="color: white;">Muốn khôi phục lại máy thì cần trả lời:</p>
     <h2 style="color: yellow;">Nam có đẹp trai không?</h2>
-    <button id="yesBtn">Rất tốt</button>
+    <button id="yesBtn">Có</button>
     <button id="noBtn">Không</button>
     <p id="response"></p>
   </div>
@@ -88,7 +88,7 @@
     const response = document.getElementById("response");
 
     yesBtn.onclick = () => {
-      response.innerText = "Vì thành khẩn trả lời, NamDzai đã khôi phục lại máy cho bạn.";
+      response.innerText = "Rất tốt! Vì thành khẩn, NamDzai đã khôi phục máy cho bạn.";
     };
 
     noBtn.onmouseover = () => {
