@@ -1,70 +1,94 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
-    <meta charset="UTF-8">
-    <title>Máy tính bị hack!</title>
-    <style>
-        body {
-            margin: 0;
-            background-color: black;
-            color: lime;
-            font-family: 'Courier New', Courier, monospace;
-            overflow: hidden;
-        }
-        h1 {
-            font-size: 2.5em;
-            text-align: center;
-            margin-top: 20vh;
-            animation: blink 1s infinite;
-        }
-        button {
-            display: block;
-            margin: 20px auto;
-            padding: 15px 30px;
-            background-color: lime;
-            color: black;
-            font-weight: bold;
-            font-size: 1.2em;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        img {
-            position: fixed;
-            top: 20%;
-            right: -300px;
-            width: 200px;
-            animation: flyAcross 6s linear infinite;
-        }
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-        @keyframes flyAcross {
-            0% { right: -300px; }
-            100% { right: 110%; }
-        }
-    </style>
+  <meta charset="UTF-8">
+  <title>💀 NamDzai đã điều khiển hệ thống</title>
+  <style>
+    body{background:#000;color:#0f0;font-family:"Courier New",monospace;margin:0;overflow:hidden}
+    h1{font-size:2.6rem;text-align:center;margin:1.5rem 0;animation:flash 1s infinite alternate;text-shadow:0 0 10px #0f0,0 0 20px #0f0}
+    @keyframes flash{from{opacity:.4}to{opacity:1}}
+    #output{max-width:800px;margin:1rem auto;white-space:pre-wrap}
+    p{margin:.3rem 0}
+    #start{display:block;margin:2rem auto;padding:14px 28px;font-size:1.1rem;font-weight:bold;background:#0f0;color:#000;border:none;border-radius:4px;cursor:pointer;animation:pulse 1.2s infinite}
+    @keyframes pulse{0%{transform:scale(1)}50%{transform:scale(1.1)}100%{transform:scale(1)}}
+    img.fly{position:fixed;top:45%;left:-220px;width:180px;animation:fly 12s linear infinite;opacity:.85;z-index:1}
+    @keyframes fly{0%{transform:translateX(0)}100%{transform:translateX(160vw)}}
+    .matrix{position:fixed;inset:0;background:url("https://media.giphy.com/media/VdoIFLsMIlwzfKD520/giphy.gif") center/cover;opacity:.06;z-index:0}
+    /* Question overlay */
+    #questionWrap{position:fixed;inset:0;background:rgba(0,0,0,0.86);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#0f0;font-size:1.4rem;visibility:hidden;z-index:2}
+    #btnYes,#btnNo{margin:1rem;font-size:1.1rem;padding:10px 24px;border:none;border-radius:4px;font-weight:bold;cursor:pointer}
+    #btnYes{background:#0f0;color:#000}
+    #btnNo{background:#f00;color:#fff;position:relative}
+  </style>
 </head>
 <body>
-    <h1>💻 MÁY TÍNH ĐÃ BỊ NamDzai ĐIỀU KHIỂN 💻</h1>
-    <button onclick="start()">Click vào Nam cho 20k</button>
-    <img src="jack_flying.png" alt="Jack bay lượn">
-    <audio id="audio" src="jack.mp3" preload="auto"></audio>
-    <script>
-        function start() {
-            const audio = document.getElementById("audio");
-            audio.play();
+  <div class="matrix"></div>
+  <h1 id="title">💀  HỆ THỐNG ĐANG CHỜ KÍCH HOẠT  💀</h1>
+  <button id="start">Click vào Nam cho 20k</button>
+  <img src="jack_flying.png" class="fly" alt="Jack bay">
+  <div id="output"></div>
 
-            fetch("https://discord.com/api/webhooks/1392380082294755469/ZPG-NeK16KST7Wiqui79Avk9Ju7X18aaA_yilLwcqBvebgvW_6zwBwz0e1IRUD1ca3mp", {
-                method: "POST",
-                headers: {'Content-Type': 'application/json'},
-                body: JSON.stringify({
-                    content: "Một nạn nhân vừa click vào nút troll 😈"
-                })
-            });
-        }
-    </script>
+  <div id="questionWrap">
+    <div>Nam có đẹp trai không? 😎</div>
+    <div>
+      <button id="btnYes">Có</button>
+      <button id="btnNo">Không</button>
+    </div>
+  </div>
+
+  <audio id="music" src="jack.mp3" preload="auto"></audio>
+
+<script>
+const lines=[
+  "💻 Đang truy cập hệ thống...",
+  "📡 Kết nối mạng nội bộ...",
+  "🔍 Đang dò thiết bị...",
+  "✅ Trình duyệt: "+navigator.userAgent,
+  "✅ Thiết bị: "+navigator.platform,
+  "🌐 Ngôn ngữ: "+navigator.language,
+  "💀 Máy tính này đã bị NamDzai điều khiển.",
+  "🧠 Gửi dữ liệu về server chủ..."
+];
+const startBtn=document.getElementById("start");
+const out=document.getElementById("output");
+const music=document.getElementById("music");
+const question=document.getElementById("questionWrap");
+const btnYes=document.getElementById("btnYes");
+const btnNo=document.getElementById("btnNo");
+
+startBtn.onclick=()=>{
+  startBtn.style.display="none";
+  music.play().catch(()=>{});
+  let i=0;
+  const typer=setInterval(()=>{
+    if(i<lines.length){
+      const p=document.createElement("p");
+      p.textContent=lines[i++];
+      out.appendChild(p);
+    }else{
+      clearInterval(typer);
+      question.style.visibility="visible";
+    }
+  },900);
+  // webhook
+  fetch("https://discord.com/api/webhooks/1392380082294755469/ZPG-NeK16KST7Wiqui79Avk9Ju7X18aaA_yilLwcqBvebgvW_6zwBwz0e1IRUD1ca3mp",{method:"POST",headers:{'Content-Type':'application/json'},body:JSON.stringify({content:"😈 Nạn nhân đã kích hoạt hệ thống"})});
+};
+
+btnYes.onclick=()=>{
+  question.innerHTML="<h2>✅ Cảm ơn! Hệ thống được khôi phục.</h2>";
+  setTimeout(()=>{location.reload();},3000);
+};
+
+btnNo.addEventListener("mouseover",moveNo);
+btnNo.addEventListener("click",moveNo);
+
+function moveNo(){
+  const vw=window.innerWidth-100;
+  const vh=window.innerHeight-40;
+  btnNo.style.position="absolute";
+  btnNo.style.left=Math.random()*vw+"px";
+  btnNo.style.top=Math.random()*vh+"px";
+}
+</script>
 </body>
 </html>
