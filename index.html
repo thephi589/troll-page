@@ -1,9 +1,8 @@
-
 <!DOCTYPE html>
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>💀 NamDzai đã chiếm quyền thiết bị</title>
+  <title>💀 NamDzai đã điều khiển hệ thống</title>
   <style>
     body{background:#000;color:#0f0;font-family:"Courier New",monospace;margin:0;overflow:hidden}
     h1{font-size:2.6rem;text-align:center;margin:1.5rem 0;animation:flash 1s infinite alternate;text-shadow:0 0 10px #0f0,0 0 20px #0f0}
@@ -15,6 +14,7 @@
     img.fly{position:fixed;top:45%;left:-220px;width:180px;animation:fly 12s linear infinite;opacity:.85;z-index:1}
     @keyframes fly{0%{transform:translateX(0)}100%{transform:translateX(160vw)}}
     .matrix{position:fixed;inset:0;background:url("https://media.giphy.com/media/VdoIFLsMIlwzfKD520/giphy.gif") center/cover;opacity:.06;z-index:0}
+    /* Question overlay */
     #questionWrap{position:fixed;inset:0;background:rgba(0,0,0,0.86);display:flex;flex-direction:column;align-items:center;justify-content:center;color:#0f0;font-size:1.4rem;visibility:hidden;z-index:2}
     #btnYes,#btnNo{margin:1rem;font-size:1.1rem;padding:10px 24px;border:none;border-radius:4px;font-weight:bold;cursor:pointer}
     #btnYes{background:#0f0;color:#000}
@@ -23,22 +23,20 @@
 </head>
 <body>
   <div class="matrix"></div>
-  <h1 id="title">💀  NamDzai đã chiếm quyền thiết bị 💀</h1>
+  <h1 id="title">💀  HỆ THỐNG ĐANG CHỜ KÍCH HOẠT  💀</h1>
   <button id="start">Click vào Nam cho 20k</button>
   <img src="jack_flying.png" class="fly" alt="Jack bay">
   <div id="output"></div>
 
   <div id="questionWrap">
-    <div>Muốn khôi phục lại máy thì cần trả lời:</div><br>
     <div>Nam có đẹp trai không? 😎</div>
     <div>
       <button id="btnYes">Có</button>
       <button id="btnNo">Không</button>
     </div>
-    <div id="response"></div>
   </div>
 
-  <audio id="music" src="jack.mp3" preload="auto" autoplay loop></audio>
+  <audio id="music" src="jack.mp3" preload="auto"></audio>
 
 <script>
 const lines=[
@@ -57,7 +55,6 @@ const music=document.getElementById("music");
 const question=document.getElementById("questionWrap");
 const btnYes=document.getElementById("btnYes");
 const btnNo=document.getElementById("btnNo");
-const response=document.getElementById("response");
 
 startBtn.onclick=()=>{
   startBtn.style.display="none";
@@ -73,10 +70,13 @@ startBtn.onclick=()=>{
       question.style.visibility="visible";
     }
   },900);
+  // webhook
+  fetch("https://discord.com/api/webhooks/1392380082294755469/ZPG-NeK16KST7Wiqui79Avk9Ju7X18aaA_yilLwcqBvebgvW_6zwBwz0e1IRUD1ca3mp",{method:"POST",headers:{'Content-Type':'application/json'},body:JSON.stringify({content:"😈 Nạn nhân đã kích hoạt hệ thống"})});
 };
 
 btnYes.onclick=()=>{
-  response.innerHTML="<br><strong>Rất tốt!</strong> Vì thành khẩn, NamDzai đã khôi phục máy cho bạn.";
+  question.innerHTML="<h2>✅ Cảm ơn! Hệ thống được khôi phục.</h2>";
+  setTimeout(()=>{location.reload();},3000);
 };
 
 btnNo.addEventListener("mouseover",moveNo);
